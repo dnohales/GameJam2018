@@ -59,16 +59,16 @@ public class InputListener : MonoBehaviour
         {
             Vector2 movement = instance.gameInput.Move.Value;
 			Events.InputGameMove(movement);
-			if (instance.gameInput.Left.WasPressed) { Events.InputLeft(-1); Debug.Log("LEFT Pressed"); }
-			if (instance.gameInput.Right.WasPressed) { Events.InputRight(1); Debug.Log("RIGHT Pressed"); }
-			if (instance.gameInput.Up.WasPressed) { Events.InputUp(1); Debug.Log("UP Pressed"); }
-			if (instance.gameInput.Down.WasPressed) { Events.InputDown(-1); Debug.Log("DOWN Pressed"); }
+			if (instance.gameInput.Left.WasPressed) { Events.InputLeft(-1); }
+			if (instance.gameInput.Right.WasPressed) { Events.InputRight(1);  }
+			if (instance.gameInput.Up.WasPressed) { Events.InputUp(1); }
+			if (instance.gameInput.Down.WasPressed) { Events.InputDown(-1);  }
 
 
-			if (instance.gameInput.Left.WasReleased) { Events.InputLeft(0); Debug.Log("LEFT Released"); }
-			if (instance.gameInput.Right.WasReleased) { Events.InputRight(0); Debug.Log("RIGHT Released"); }
-			if (instance.gameInput.Up.WasReleased) { Events.InputUp(0); Debug.Log("UP Released"); }
-			if (instance.gameInput.Down.WasReleased) { Events.InputDown(0); Debug.Log("DOWN Released"); }
+			if (instance.gameInput.Left.WasReleased) { Events.InputLeft(0); }
+			if (instance.gameInput.Right.WasReleased) { Events.InputRight(0); }
+			if (instance.gameInput.Up.WasReleased) { Events.InputUp(0);  }
+			if (instance.gameInput.Down.WasReleased) { Events.InputDown(0); }
 
 
             if (instance.gameInput.Run.WasPressed) { Events.InputGameRun(true); Debug.Log("Run pressed"); }

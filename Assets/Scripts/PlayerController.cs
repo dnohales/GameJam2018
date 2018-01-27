@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
 	private Vector2 vel;
 
 	public float speed;
-
+	public SphereCollider _smallCollider;
+	public SphereCollider _bigCollider;
 
 	private void Awake()
 	{
@@ -43,5 +44,15 @@ public class PlayerController : MonoBehaviour
 		Vector2 nVel = vel;
 		nVel *= speed;
 		rb.velocity = nVel;
+	}
+
+	private void OnTriggerEnter(Collider col)
+	{
+		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
+		if (prosp != null && col == prosp._smallCollider) {
+			prosp.Follow ();
+		}
+
+			
 	}
 }
