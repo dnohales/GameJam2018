@@ -35,12 +35,17 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
-		// culpa de fran
+		//culpa de fran
 		//vel.Normalize ();
 	}
 
 	private void FixedUpdate()
 	{
+		if (vel.magnitude != 0) {
+			float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg; 
+			transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+		}
+
 		Vector2 nVel = vel;
 		nVel *= speed;
 		rb.velocity = nVel;
