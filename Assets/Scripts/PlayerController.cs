@@ -7,12 +7,11 @@ public class PlayerController : MonoBehaviour
 	[HideInInspector]
 	public int Influence;
 
-	private Rigidbody rb;
+	private Rigidbody2D rb;
 	private Vector2 vel;
 
 	public float speed;
-	public SphereCollider _smallCollider;
-	public SphereCollider _bigCollider;
+
 
 	private void Awake()
 	{
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour
 		InputListener.Events.OnInputUp += GetMoveVerValues;
 		InputListener.Events.OnInputDown += GetMoveVerValues;
 
-		rb = GetComponent<Rigidbody> ();
+		rb = GetComponent<Rigidbody2D> ();
 	}
 
 	private void GetMoveHorValues(float x)
@@ -55,7 +54,7 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = nVel;
 	}
 
-	private void OnTriggerEnter(Collider col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
 		if (prosp != null && col == prosp._smallCollider && !prosp._converted) {

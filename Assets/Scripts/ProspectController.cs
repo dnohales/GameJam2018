@@ -8,20 +8,15 @@ public class ProspectController : MonoBehaviour
 	public bool _converted;
 	public float speed;
 
-	[SerializeField]
-	private Material _convertedMaterial;
-
 	private PlayerController player;
-	public SphereCollider _smallCollider;
-	public SphereCollider _bigCollider;
+	public CircleCollider2D _smallCollider;
 
-	private Rigidbody rb;
+	private Rigidbody2D rb;
 
 
 	private void Awake()
 	{
-		rb = GetComponent<Rigidbody> ();
-		Renderer ren = gameObject.GetComponent<Renderer> ();
+		rb = GetComponent<Rigidbody2D> ();
 		_converted = false;
 	}
 
@@ -31,10 +26,6 @@ public class ProspectController : MonoBehaviour
         player = _player;
         rb.isKinematic = false;
 
-		if (_convertedMaterial != null) {
-			Renderer ren = gameObject.GetComponent<Renderer> ();
-			ren.material = _convertedMaterial;
-		}
 		return Influence;
 	}
 
@@ -43,11 +34,11 @@ public class ProspectController : MonoBehaviour
         if (!_converted)
 			return;
 
-        Vector3 vector = rb.velocity.normalized;
+        Vector2 vector = rb.velocity.normalized;
 
         float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        float dis = Vector3.Distance (gameObject.transform.position, player.gameObject.transform.position);
+        float dis = Vector2.Distance (gameObject.transform.position, player.gameObject.transform.position);
 
 		if (dis > 3f) {
 			rb.velocity = GetVel ();
