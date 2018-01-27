@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
+	[HideInInspector]
+	public int Influence;
 	
 	private Rigidbody rb;
 	private Vector2 vel;
@@ -14,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-
+		Influence = 1;
 		InputListener.Events.OnInputLeft += GetMoveHorValues;
 		InputListener.Events.OnInputRight +=GetMoveHorValues;
 		InputListener.Events.OnInputUp += GetMoveVerValues;
@@ -42,9 +44,11 @@ public class PlayerController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		if (vel.magnitude != 0) {
+			rb.isKinematic = false;
 			float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg; 
 			transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-		}
+		}else
+			rb.isKinematic = true;
 
 		Vector2 nVel = vel;
 		nVel *= speed;
@@ -54,10 +58,11 @@ public class PlayerController : MonoBehaviour
 	private void OnTriggerEnter(Collider col)
 	{
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
-		if (prosp != null && col == prosp._smallCollider) {
-			prosp.Follow ();
+		if (prosp != null && col == prosp._smallCollider && !prosp._converted) {
+			if ( Influence >= prosp.Influence) {
+				Influence += prosp.Follow ();
+				UIController.instance.SetInfluence (Influence);
+			}
 		}
-
-			
 	}
 }

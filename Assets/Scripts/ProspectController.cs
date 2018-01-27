@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ProspectController : MonoBehaviour 
 {
-	private bool _converted;
+
+	public int Influence;
+
+	public bool _converted;
 	private bool _follow;
 
 	public float speed;
@@ -21,6 +24,7 @@ public class ProspectController : MonoBehaviour
 
 	private Rigidbody rb;
 
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody> ();
@@ -30,7 +34,7 @@ public class ProspectController : MonoBehaviour
 		_converted = false;
 	}
 
-	public void Follow()
+	public int Follow()
 	{
 		_converted = true;
 
@@ -38,6 +42,7 @@ public class ProspectController : MonoBehaviour
 			Renderer ren = gameObject.GetComponent<Renderer> ();
 			ren.material = _convertedMaterial;
 		}
+		return Influence;
 	}
 
 	private void FixedUpdate()
@@ -66,6 +71,7 @@ public class ProspectController : MonoBehaviour
 			return;
 
 		_follow = true;
+		rb.isKinematic = false;
 		PositionToGo = col.gameObject.transform.position;
 	}
 

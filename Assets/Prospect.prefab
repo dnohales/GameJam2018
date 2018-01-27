@@ -95,7 +95,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b53bc31d7496645b0966a5be4ac60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Influence: 0
+  _converted: 0
   speed: 6
   _convertedMaterial: {fileID: 2100000, guid: 66d75295bb92f1048a18438e32c4cb1f, type: 2}
   _smallCollider: {fileID: 135617287133315306}
