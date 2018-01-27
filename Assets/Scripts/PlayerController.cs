@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 	[HideInInspector]
 	public int Influence;
 
+	public static PlayerController instance;
+
 	private Rigidbody2D rb;
 	private Vector2 vel;
 
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
+		instance = this;
 		Influence = 1;
 		InputListener.Events.OnInputLeft += GetMoveHorValues;
 		InputListener.Events.OnInputRight +=GetMoveHorValues;
@@ -63,5 +66,12 @@ public class PlayerController : MonoBehaviour
 				UIController.instance.SetInfluence (Influence);
 			}
 		}
+	}
+
+	public void DecInfluence(int value)
+	{
+		Influence -= value;
+		UIController.instance.SetInfluence (Influence);
+		UIController.instance.UpdateInfluence ();
 	}
 }

@@ -9,6 +9,7 @@ public class ProspectController : MonoBehaviour
 	public float speed;
 
 	private PlayerController player;
+	private EnemyController enemy;
 	public CircleCollider2D _smallCollider;
 
 	private Rigidbody2D rb;
@@ -22,9 +23,24 @@ public class ProspectController : MonoBehaviour
 
     public int Follow(PlayerController _player)
 	{
+		if (enemy != null)
+			enemy = null;
+		
 		_converted = true;
         player = _player;
         rb.isKinematic = false;
+
+		return Influence;
+	}
+
+	public int Follow(EnemyController enemy)
+	{
+		if (player!=null)
+			player = null;
+		
+		_converted = true;
+		this.enemy = enemy;
+		rb.isKinematic = false;
 
 		return Influence;
 	}
@@ -38,7 +54,11 @@ public class ProspectController : MonoBehaviour
 
         float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        float dis = Vector2.Distance (gameObject.transform.position, player.gameObject.transform.position);
+		float dis = 0;
+		if (player != null)
+        	dis = Vector2.Distance (gameObject.transform.position, player.gameObject.transform.position);
+		else if (enemy != null)
+			dis = Vector2.Distance (gameObject.transform.position, enemy.gameObject.transform.position);
 
 		if (dis > 3f) {
 			rb.velocity = GetVel ();
@@ -49,7 +69,12 @@ public class ProspectController : MonoBehaviour
 
 	private Vector3 GetVel()
 	{
-        Vector3 vel = player.transform.position - gameObject.transform.position;
+		Vector3 vel = new Vector3 ();
+		if (player != null)
+			vel = player.transform.position - gameObject.transform.position;
+		else if  (enemy != null)
+			vel = enemy.transform.position - gameObject.transform.position;
+		
 		vel.Normalize ();
 		return vel * speed;
 	}

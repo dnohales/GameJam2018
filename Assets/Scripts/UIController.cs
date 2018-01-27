@@ -33,5 +33,11 @@ public class UIController : MonoBehaviour
 	{
 		currentInfluence = value;
 		UpdateInfluence ();
+	}	
+
+	public void DecInfluence(int value)
+	{	
+		currentInfluence -= value;
+		UpdateInfluence ();
 	}
 }
