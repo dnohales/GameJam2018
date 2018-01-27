@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Input\InputListener.cs">
+    <Files>
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="16" Column="26" />
+      <File FileName="Assets\Scripts\ProspectController.cs" Line="7" Column="2" />
+      <File FileName="Assets\Scripts\Input\InGameInputActions.cs" Line="25" Column="13" />
+      <File FileName="Assets\Scripts\Input\InputListener.cs" Line="66" Column="31" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
