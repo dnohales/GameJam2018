@@ -59,7 +59,14 @@ public class ProspectController : MonoBehaviour
 			PositionToGo = player.gameObject.transform.position;
 		}
 
-	}
+        if (rb.velocity.magnitude == 0)
+            return;
+
+        Vector3 vector = rb.velocity.normalized;
+
+        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
 
 	private void OnTriggerExit(Collider col)
 	{
