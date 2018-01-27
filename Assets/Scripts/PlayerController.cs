@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
+	
 	private Rigidbody rb;
 	private Vector2 vel;
 
@@ -23,12 +24,12 @@ public class PlayerController : MonoBehaviour
 
 	private void GetMoveHorValues(float x)
 	{
-		vel = new Vector2 (x,vel.y);
+		vel.x = x;
 	}
 
 	private void GetMoveVerValues(float y)
 	{
-		vel = new Vector2 (vel.x,y);
+		vel.y = y;
 	}
 
 	private void Update()
@@ -39,8 +40,8 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		vel.Normalize ();
-		vel *= speed;
-		rb.velocity = vel;
+		Vector2 nVel = vel;
+		nVel *= speed;
+		rb.velocity = nVel;
 	}
 }
