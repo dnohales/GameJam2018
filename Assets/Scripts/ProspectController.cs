@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProspectController : MonoBehaviour 
+public class ProspectController : MonoBehaviour
 {
-
 	public int Influence;
-
 	public bool _converted;
-	private bool _follow;
-
 	public float speed;
 
-	//[SerializeField]
-	//private Material _normalMaterial;
 	[SerializeField]
 	private Material _convertedMaterial;
 
-	private Vector3 PositionToGo;
 	private PlayerController player;
 	public SphereCollider _smallCollider;
 	public SphereCollider _bigCollider;
@@ -29,14 +22,14 @@ public class ProspectController : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody> ();
 		Renderer ren = gameObject.GetComponent<Renderer> ();
-		//ren.material = _convertedMaterial;
-		_follow = false;
 		_converted = false;
 	}
 
-	public int Follow()
+    public int Follow(PlayerController _player)
 	{
 		_converted = true;
+        player = _player;
+        rb.isKinematic = false;
 
 		if (_convertedMaterial != null) {
 			Renderer ren = gameObject.GetComponent<Renderer> ();
@@ -47,61 +40,25 @@ public class ProspectController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (!_converted)
+        if (!_converted)
 			return;
-		if (!_follow)
-			return;
-		float dis = Vector3.Distance (gameObject.transform.position, PositionToGo);
-
-		if (dis > 0.5f) {
-			rb.velocity = GetVel ();
-		} else {
-			PositionToGo = player.gameObject.transform.position;
-		}
-
-        if (rb.velocity.magnitude == 0)
-            return;
 
         Vector3 vector = rb.velocity.normalized;
 
         float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-    }
+        float dis = Vector3.Distance (gameObject.transform.position, player.gameObject.transform.position);
 
-	private void OnTriggerExit(Collider col)
-	{
-		if (col.gameObject.name != "Player")
-			return;
-		if (!_converted)
-			return;
-		if (col != col.gameObject.GetComponent<PlayerController> ()._smallCollider)
-			return;
-
-		_follow = true;
-		rb.isKinematic = false;
-		PositionToGo = col.gameObject.transform.position;
-	}
-
-	private void OnTriggerEnter(Collider col)
-	{		
-		if (col.gameObject.name != "Player")
-			return;
-		if (!_converted)
-			return;
-
-		if (player == null)
-			player = col.gameObject.GetComponent<PlayerController> ();
-
-		if (col != player._smallCollider)
-			return;
-
-		rb.velocity = Vector3.zero;
-		_follow = false;
+		if (dis > 3f) {
+			rb.velocity = GetVel ();
+        } else {
+            rb.velocity = Vector3.zero;
+        }
 	}
 
 	private Vector3 GetVel()
 	{
-		Vector3 vel = PositionToGo - gameObject.transform.position;
+        Vector3 vel = player.transform.position - gameObject.transform.position;
 		vel.Normalize ();
 		return vel * speed;
 	}

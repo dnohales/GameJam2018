@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour 
+public class PlayerController : MonoBehaviour
 {
 	[HideInInspector]
 	public int Influence;
-	
+
 	private Rigidbody rb;
 	private Vector2 vel;
 
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (vel.magnitude != 0) {
 			rb.isKinematic = false;
-			float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg; 
+			float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 		}else
 			rb.isKinematic = true;
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
 		if (prosp != null && col == prosp._smallCollider && !prosp._converted) {
 			if ( Influence >= prosp.Influence) {
-				Influence += prosp.Follow ();
+				Influence += prosp.Follow (this);
 				UIController.instance.SetInfluence (Influence);
 			}
 		}
