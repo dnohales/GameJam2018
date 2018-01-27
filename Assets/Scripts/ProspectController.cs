@@ -25,7 +25,7 @@ public class ProspectController : MonoBehaviour
 	{
 		if (enemy != null)
 			enemy = null;
-		
+
 		_converted = true;
         player = _player;
         rb.isKinematic = false;
@@ -37,7 +37,7 @@ public class ProspectController : MonoBehaviour
 	{
 		if (player!=null)
 			player = null;
-		
+
 		_converted = true;
 		this.enemy = enemy;
 		rb.isKinematic = false;
@@ -50,18 +50,16 @@ public class ProspectController : MonoBehaviour
         if (!_converted)
 			return;
 
-        Vector2 vector = rb.velocity.normalized;
-
-        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 		float dis = 0;
 		if (player != null)
         	dis = Vector2.Distance (gameObject.transform.position, player.gameObject.transform.position);
 		else if (enemy != null)
 			dis = Vector2.Distance (gameObject.transform.position, enemy.gameObject.transform.position);
 
-		if (dis > 3f) {
-			rb.velocity = GetVel ();
+        if (dis > 3f) {
+            rb.velocity = GetVel ();
+            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         } else {
             rb.velocity = Vector3.zero;
         }
@@ -74,7 +72,7 @@ public class ProspectController : MonoBehaviour
 			vel = player.transform.position - gameObject.transform.position;
 		else if  (enemy != null)
 			vel = enemy.transform.position - gameObject.transform.position;
-		
+
 		vel.Normalize ();
 		return vel * speed;
 	}
