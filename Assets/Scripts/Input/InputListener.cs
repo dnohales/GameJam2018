@@ -11,7 +11,6 @@ public class InputListener : MonoBehaviour
     private InGameInputActions gameInput;
 
     private State currentState;
-    private State onMenu;
     private State onGame;
 
     private void Awake()
@@ -60,10 +59,17 @@ public class InputListener : MonoBehaviour
         {
             Vector2 movement = instance.gameInput.Move.Value;
 			Events.InputGameMove(movement);
-			if (instance.gameInput.Left.WasPressed) { Events.InputGameRun(true); Debug.Log("Run pressed"); }
-			if (instance.gameInput.Right.WasPressed) { Events.InputGameRun(true); Debug.Log("Run pressed"); }
-			if (instance.gameInput.Up.WasPressed) { Events.InputGameRun(true); Debug.Log("Run pressed"); }
-			if (instance.gameInput.Down.WasPressed) { Events.InputGameRun(true); Debug.Log("Run pressed"); }
+			if (instance.gameInput.Left.WasPressed) { Events.InputLeft(-1); Debug.Log("LEFT Pressed"); }
+			if (instance.gameInput.Right.WasPressed) { Events.InputRight(1); Debug.Log("RIGHT Pressed"); }
+			if (instance.gameInput.Up.WasPressed) { Events.InputUp(1); Debug.Log("UP Pressed"); }
+			if (instance.gameInput.Down.WasPressed) { Events.InputDown(-1); Debug.Log("DOWN Pressed"); }
+
+
+			if (instance.gameInput.Left.WasReleased) { Events.InputLeft(0); Debug.Log("LEFT Released"); }
+			if (instance.gameInput.Right.WasReleased) { Events.InputRight(0); Debug.Log("RIGHT Released"); }
+			if (instance.gameInput.Up.WasReleased) { Events.InputUp(0); Debug.Log("UP Released"); }
+			if (instance.gameInput.Down.WasReleased) { Events.InputDown(0); Debug.Log("DOWN Released"); }
+
 
             if (instance.gameInput.Run.WasPressed) { Events.InputGameRun(true); Debug.Log("Run pressed"); }
             if (instance.gameInput.Run.WasReleased) { Events.InputGameRun(false); Debug.Log("Run released"); }
@@ -85,32 +91,32 @@ public class InputListener : MonoBehaviour
     {
 
         //IN MENU INPUT
-        public static Action OnInputMenuUp;
-        public static void InputMenuUp()
+		public static Action <float> OnInputUp;
+		public static void InputUp(float value)
         {
-            if (OnInputMenuUp != null)
-                OnInputMenuUp();
+            if (OnInputUp != null)
+				OnInputUp(value);
         }
 
-        public static Action OnInputMenuDown;
-        public static void InputMenuDown()
+        public static Action <float> OnInputDown;
+		public static void InputDown(float value)
         {
-            if (OnInputMenuDown != null)
-                OnInputMenuDown();
+            if (OnInputDown != null)
+				OnInputDown(value);
         }
 
-        public static Action OnInputMenuLeft;
-        public static void InputMenuLeft()
+		public static Action <float> OnInputLeft;
+		public static void InputLeft(float value)
         {
-            if (OnInputMenuLeft != null)
-                OnInputMenuLeft();
+            if (OnInputLeft != null)
+				OnInputLeft(value);
         }
 
-        public static Action OnInputMenuRight;
-        public static void InputMenuRight()
+		public static Action <float> OnInputRight;
+		public static void InputRight(float value)
         {
-            if (OnInputMenuRight != null)
-                OnInputMenuRight();
+            if (OnInputRight != null)
+				OnInputRight(value);
         }
 
         public static Action OnInputMenuBack;
