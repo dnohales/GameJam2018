@@ -108,7 +108,7 @@ MonoBehaviour:
   Influence: 1
   _converted: 0
   speed: 23
-  prowlSpeed: 10
+  prowlSpeed: 12
   prowlPath: []
   _smallCollider: {fileID: 58582590208049368}
 --- !u!212 &212606053407932692
