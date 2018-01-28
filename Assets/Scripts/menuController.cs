@@ -31,7 +31,7 @@ public class menuController : MonoBehaviour {
 	}
 
 	public void useCreditButton () {
-		SceneManager.LoadScene (4);
+		SceneManager.LoadScene (3);
 	}
 
 
