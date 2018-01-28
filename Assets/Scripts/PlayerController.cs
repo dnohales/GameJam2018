@@ -51,6 +51,15 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = nVel;
 	}
 
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        EnemyController enemy = col.gameObject.GetComponent<EnemyController> ();
+
+        if (enemy != null && col == enemy._smallCollider) {
+            enemy.HideInfluenceText ();
+        }
+    }
+
 	private void OnTriggerEnter2D(Collider2D col)
 	{
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
@@ -66,11 +75,12 @@ public class PlayerController : MonoBehaviour
             }
 		}
 
-		if (enemy != null && col == enemy._smallCollider && !enemy._converted) {
-			if (this.Influence >= enemy.Influence) {
+		if (enemy != null && col == enemy._smallCollider) {
+            enemy.ShowInfluenceText ();
+            if (!enemy._converted && this.Influence >= enemy.Influence) {
 				this.Influence += enemy.Follow (this);
 				UIController.instance.SetInfluence (Influence);
-			}
+            }
 		}
 	}
 

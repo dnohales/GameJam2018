@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class EnemyController : MonoBehaviour
 	public CircleCollider2D _smallCollider;
 
 	private Rigidbody2D rb;
+    private Text influenceText;
 
 	private void Awake()
 	{
@@ -28,7 +30,8 @@ public class EnemyController : MonoBehaviour
 
 		_converted = false;
 
-
+		influenceText = transform.Find("Canvas").Find("InfluenceText").GetComponent<Text> ();
+        HideInfluenceText ();
 	}
 
 	private void Start()
@@ -43,12 +46,31 @@ public class EnemyController : MonoBehaviour
 		gameObject.SetActive (false);
 	}
 
+    public void ShowInfluenceText()
+    {
+        influenceText.text = Influence.ToString ();
+    }
+
+    public void HideInfluenceText()
+    {
+        influenceText.text = "";
+    }
+
+    private void UpdateInfluenceText()
+    {
+        if (!_converted) {
+            influenceText.text = Influence.ToString ();
+        } else {
+            influenceText.text = "";
+        }
+    }
+
 	private void OnTriggerEnter2D(Collider2D col)
 	{
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
 
 		if (prosp != null && col == prosp._smallCollider) {
-            if ( prosp.player == null || Influence > prosp.player.Influence) {
+            if ( prosp.player == null && !prosp._converted || prosp.player != null && Influence > prosp.player.Influence) {
                 if (prosp.player != null)
                     PlayerController.instance.DecInfluence (prosp.Influence);
 				Influence += prosp.Follow (this);
@@ -64,6 +86,7 @@ public class EnemyController : MonoBehaviour
 		_converted = true;
 		player = _player;
 		rb.isKinematic = false;
+        HideInfluenceText ();
 
 		return Influence;
 	}
@@ -76,6 +99,7 @@ public class EnemyController : MonoBehaviour
 		_converted = true;
 		this.enemy = enemy;
 		rb.isKinematic = false;
+        HideInfluenceText ();
 
 		return Influence;
 	}
