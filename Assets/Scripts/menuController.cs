@@ -30,11 +30,14 @@ public class menuController : MonoBehaviour {
 		SceneManager.LoadScene (0);
 	}
 
+	public void useCreditButton () {
+		SceneManager.LoadScene (4);
+	}
+
 
 	public void exit(){
 		
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			print ("Algo");
 			SceneManager.LoadScene (0);
 		}
 	}
