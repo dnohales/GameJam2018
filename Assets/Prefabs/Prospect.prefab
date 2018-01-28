@@ -109,9 +109,7 @@ MonoBehaviour:
   _converted: 0
   speed: 23
   prowlSpeed: 12
-  prowlPath:
-  - {fileID: 0}
-  - {fileID: 0}
+  prowlPath: []
   player: {fileID: 0}
   enemy: {fileID: 0}
   _smallCollider: {fileID: 58582590208049368}
@@ -124,6 +122,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -139,6 +138,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
