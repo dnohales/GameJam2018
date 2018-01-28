@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
 
 		if (prosp != null && col == prosp._smallCollider) {
-			if ( Influence > PlayerController.instance.Influence) {
+            if ( prosp.player == null || Influence > prosp.player.Influence) {
 				Influence += prosp.Follow (this);
 				if (prosp.player != null)
 					PlayerController.instance.DecInfluence (prosp.Influence);
