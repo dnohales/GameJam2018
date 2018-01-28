@@ -8227,7 +8227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeToPlay: 180
-  InfluenceToWin: 200
+  InfluenceToWin: 2500
   Timer: 0
   totalInfluence: 0
   GameIsRunning: 0
