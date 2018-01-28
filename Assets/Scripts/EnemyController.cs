@@ -35,9 +35,9 @@ public class EnemyController : MonoBehaviour
 
 		if (prosp != null && col == prosp._smallCollider) {
             if ( prosp.player == null || Influence > prosp.player.Influence) {
+                if (prosp.player != null)
+                    PlayerController.instance.DecInfluence (prosp.Influence);
 				Influence += prosp.Follow (this);
-				if (prosp.player != null)
-					PlayerController.instance.DecInfluence (prosp.Influence);
 			}
 		}
 	}
