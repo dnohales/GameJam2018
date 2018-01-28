@@ -19,28 +19,15 @@ public class PlayerController : MonoBehaviour
 	{
 		instance = this;
 		Influence = 1;
-		InputListener.Events.OnInputLeft += GetMoveHorValues;
-		InputListener.Events.OnInputRight +=GetMoveHorValues;
-		InputListener.Events.OnInputUp += GetMoveVerValues;
-		InputListener.Events.OnInputDown += GetMoveVerValues;
 
 		rb = GetComponent<Rigidbody2D> ();
 	}
 
-	private void GetMoveHorValues(float x)
-	{
-		vel.x = x;
-	}
-
-	private void GetMoveVerValues(float y)
-	{
-		vel.y = y;
-	}
-
 	private void Update()
 	{
-		//culpa de fran
-		//vel.Normalize ();
+        vel.x = Input.GetAxisRaw ("Horizontal");
+        vel.y = Input.GetAxisRaw ("Vertical");
+        vel.Normalize();
 	}
 
 	private void FixedUpdate()
