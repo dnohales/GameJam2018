@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
 		if (enemy != null)
 			enemy = null;
 
+		SoundManager.instance.PlayWololo ();
 		_converted = true;
 		player = _player;
 		rb.isKinematic = false;
@@ -57,6 +58,7 @@ public class EnemyController : MonoBehaviour
 		if (player!=null)
 			player = null;
 
+		SoundManager.instance.PlayWololo ();
 		_converted = true;
 		this.enemy = enemy;
 		rb.isKinematic = false;
