@@ -27,6 +27,20 @@ public class EnemyController : MonoBehaviour
 		rb = GetComponent<Rigidbody2D> ();
 
 		_converted = false;
+
+
+	}
+
+	private void Start()
+	{
+		InGameController.instance.totalInfluence += Influence;
+		InGameController.instance.OnEndGame += Disable;
+	}
+
+	private void Disable()
+	{
+		InGameController.instance.OnEndGame -= Disable;
+		gameObject.SetActive (false);
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)

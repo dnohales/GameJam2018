@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
 		Influence = 1;
 
 		rb = GetComponent<Rigidbody2D> ();
+
+
+	}
+
+	private void Start(){
+
+		InGameController.instance.totalInfluence += Influence;
 	}
 
 	private void Update()

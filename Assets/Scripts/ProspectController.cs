@@ -18,6 +18,7 @@ public class ProspectController : MonoBehaviour
 	private Rigidbody2D rb;
 
 
+
 	private void Awake()
 	{
         if (prowlPath.Count > 0) {
@@ -27,6 +28,19 @@ public class ProspectController : MonoBehaviour
         }
 		rb = GetComponent<Rigidbody2D> ();
 		_converted = false;
+
+	}
+
+	private void Start()
+	{
+		InGameController.instance.totalInfluence += Influence;
+		InGameController.instance.OnEndGame += Disable;
+	}
+
+	private void Disable()
+	{
+		InGameController.instance.OnEndGame -= Disable;
+		gameObject.SetActive (false);
 	}
 
     public int Follow(PlayerController _player)

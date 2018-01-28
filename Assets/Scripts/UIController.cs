@@ -9,6 +9,11 @@ public class UIController : MonoBehaviour
 	public Text influence;
 	private int currentInfluence;
 
+	public Text Timer;
+
+	public GameObject EndPanelLose;
+	public GameObject EndPanelWin;
+
 	public static UIController instance;
 
 	private void Start()
@@ -17,6 +22,17 @@ public class UIController : MonoBehaviour
 		currentInfluence = Player.Influence;
 		influence.text = currentInfluence.ToString();
 	}
+
+	private void Update(){
+		if (InGameController.instance == null)
+			return;
+
+		if (Timer == null)
+			return;
+
+		Timer.text = InGameController.instance.Timer.ToString("##.##");
+	}
+	
 
 	public void AddInfluence(int value)
 	{	
@@ -39,5 +55,17 @@ public class UIController : MonoBehaviour
 	{	
 		currentInfluence -= value;
 		UpdateInfluence ();
+	}
+
+	public void ShowEnd()
+	{
+		if (PlayerController.instance.Influence >= InGameController.instance.InfluenceToWin) {
+			if (EndPanelWin != null)
+				EndPanelWin.SetActive (true);
+		} else {
+			if (EndPanelLose != null) {
+				EndPanelLose.SetActive (true);
+			}
+		}
 	}
 }
