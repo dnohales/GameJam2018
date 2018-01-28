@@ -76,10 +76,12 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (enemy != null && col == enemy._smallCollider) {
-            enemy.ShowInfluenceText ();
-            if (!enemy._converted && this.Influence >= enemy.Influence) {
-				this.Influence += enemy.Follow (this);
-				UIController.instance.SetInfluence (Influence);
+            if (enemy.player == null) {
+                enemy.ShowInfluenceText ();
+                if (this.Influence >= enemy.Influence) {
+    				this.Influence += enemy.Follow (this);
+    				UIController.instance.SetInfluence (Influence);
+                }
             }
 		}
 	}

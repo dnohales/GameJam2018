@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
 
 	private Rigidbody2D rb;
     private Text influenceText;
+    private RectTransform influencePanel;
 
 	private void Awake()
 	{
@@ -30,7 +31,8 @@ public class EnemyController : MonoBehaviour
 
 		_converted = false;
 
-		influenceText = transform.Find("Canvas").Find("InfluenceText").GetComponent<Text> ();
+        influencePanel = transform.Find("Canvas").Find("Panel").GetComponent<RectTransform> ();
+        influenceText = influencePanel.Find("InfluenceText").GetComponent<Text> ();
         HideInfluenceText ();
 	}
 
@@ -48,21 +50,13 @@ public class EnemyController : MonoBehaviour
 
     public void ShowInfluenceText()
     {
+        influencePanel.gameObject.SetActive (true);
         influenceText.text = Influence.ToString ();
     }
 
     public void HideInfluenceText()
     {
-        influenceText.text = "";
-    }
-
-    private void UpdateInfluenceText()
-    {
-        if (!_converted) {
-            influenceText.text = Influence.ToString ();
-        } else {
-            influenceText.text = "";
-        }
+        influencePanel.gameObject.SetActive (false);
     }
 
 	private void OnTriggerEnter2D(Collider2D col)
