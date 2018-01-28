@@ -29,26 +29,6 @@ public class ProspectController : MonoBehaviour
 		_converted = false;
 	}
 
-	private void FixedUpdate()
-	{
-		if (!_converted)
-			return;
-
-		float dis = 0;
-		if (player != null)
-			dis = Vector2.Distance (gameObject.transform.position, player.gameObject.transform.position);
-		else if (enemy != null)
-			dis = Vector2.Distance (gameObject.transform.position, enemy.gameObject.transform.position);
-
-		if (dis > 3f) {
-			rb.velocity = GetVel ();
-			float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-		} else {
-			rb.velocity = Vector3.zero;
-		}
-	}
-
     public int Follow(PlayerController _player)
 	{
 		if (enemy != null)
@@ -125,7 +105,7 @@ public class ProspectController : MonoBehaviour
 	{
         Vector3 vel = destination - gameObject.transform.position;
 		vel.Normalize ();
-		return vel * speed;
+        return vel * speed;
 	}
 
 }
