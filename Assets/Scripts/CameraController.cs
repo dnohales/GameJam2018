@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour
 {
 	public Transform target;
 	public float smoothTime;
-    public float zoom;
 	private Vector3 velocity = Vector3.zero;
 
     private void Awake()
@@ -22,6 +21,6 @@ public class CameraController : MonoBehaviour
 
     private Vector3 AdjustZoomForVector(Vector3 vec)
     {
-        return new Vector3 (vec.x, vec.y, -zoom);
+        return new Vector3 (vec.x, vec.y, -1);
     }
 }
