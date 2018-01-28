@@ -49,11 +49,14 @@ public class PlayerController : MonoBehaviour
 		ProspectController prosp = col.gameObject.GetComponent<ProspectController> ();
 		EnemyController enemy = col.gameObject.GetComponent<EnemyController> ();
 
-		if (prosp != null && col == prosp._smallCollider && !prosp._converted) {
-			if ( Influence >= prosp.Influence) {
-				Influence += prosp.Follow (this);
-				UIController.instance.SetInfluence (Influence);
-			}
+		if (prosp != null && col == prosp._smallCollider) {
+            if (!prosp._converted || prosp.enemy != null && this.Influence >= prosp.enemy.Influence && !prosp.enemy._converted) {
+                Influence += prosp.Follow (this);
+                UIController.instance.SetInfluence (Influence);
+                if (prosp.enemy != null) {
+                    prosp.enemy.Influence -= prosp.Influence;
+                }
+            }
 		}
 
 		if (enemy != null && col == enemy._smallCollider && !enemy._converted) {
