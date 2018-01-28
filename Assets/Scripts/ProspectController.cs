@@ -8,8 +8,8 @@ public class ProspectController : MonoBehaviour
 	public bool _converted;
 	public float speed;
 
-	private PlayerController player;
-	private EnemyController enemy;
+	public PlayerController player;
+	public EnemyController enemy;
 	public CircleCollider2D _smallCollider;
 
 	private Rigidbody2D rb;

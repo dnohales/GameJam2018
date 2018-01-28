@@ -8,8 +8,8 @@ public class EnemyController : MonoBehaviour
 	public bool _converted;
 	public float speed;
 
-	private PlayerController player;
-	private EnemyController enemy;
+	public PlayerController player;
+	public EnemyController enemy;
 	public CircleCollider2D _smallCollider;
 
 	private Rigidbody2D rb;
@@ -28,7 +28,8 @@ public class EnemyController : MonoBehaviour
 		if (prosp != null && col == prosp._smallCollider) {
 			if ( Influence > PlayerController.instance.Influence) {
 				Influence += prosp.Follow (this);
-				PlayerController.instance.DecInfluence (prosp.Influence);
+				if (prosp.player != null)
+					PlayerController.instance.DecInfluence (prosp.Influence);
 			}
 		}
 	}
@@ -56,7 +57,7 @@ public class EnemyController : MonoBehaviour
 	public int Follow(PlayerController _player) {
 		if (enemy != null)
 			enemy = null;
-
+		
 		_converted = true;
 		player = _player;
 		rb.isKinematic = false;
